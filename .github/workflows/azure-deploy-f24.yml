@@ -19,7 +19,7 @@ jobs:
       ./.github/workflows/test.yaml
 
   build-and-deploy:
-    if: github.repository == 'cmu-313/NodeBB'
+    if: github.repository == 'AZHenley/NodeBB'
     needs: lint-and-test
 
     runs-on: ubuntu-latest
@@ -34,7 +34,7 @@ jobs:
 
       - name: Set up NodeBB
         run: |
-          ./nodebb setup '{"url":"https://313-nodebb-spring25.azurewebsites.net:443",
+          ./nodebb setup '{"url":"https://nodebb-cmu313.azurewebsites.net:443",
             "admin:username": "admin",
             "admin:password": "${{ secrets.ADMIN_PASSWORD }}",
             "admin:password:confirm": "${{ secrets.ADMIN_PASSWORD }}",
@@ -48,7 +48,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: '313-NodeBB-Spring25'
+          app-name: 'nodebb-cmu313'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_21969E1D74744206A7839939758EB8FA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_26A9A76BC4A34635A307D2B70507E6C7 }}
           package: .
